@@ -4,6 +4,9 @@ import {openingHours} from "../../utils/opening-hous.js"// importa o modulo
 
 const hours = document.getElementById("hours")
 export function hoursLoad({date}) {
+    // Limpa os horarios anteriores
+    hours.innerHTML = ""
+
     const opening = openingHours.map((hour) => {
         // Recupera somente a Hora
         const [scheduleHour] = hour.split(":")
