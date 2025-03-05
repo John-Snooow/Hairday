@@ -1,6 +1,6 @@
 {
   "name": "hairday",
-  "description": "Apli cativo Web para agendamento de corte de cabelo",
+  "description": "Aplicação Web para agendamento de corte de cabelo",
   "author": "John Frank",
   "scripts": {
     "build": "webpack",
