@@ -1,6 +1,7 @@
 import dayjs from "dayjs"
 
 import {openingHours} from "../../utils/opening-hous.js"// importa o modulo
+import { hoursClick } from "./hours-click"
 
 const hours = document.getElementById("hours")
 export function hoursLoad({date}) {
