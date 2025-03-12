@@ -1,13 +1,13 @@
 import dayjs from "dayjs";
 
 //seleciona as sessoes manha, tarde e noite
-const periodMorning = document.getElementById("morning");
-const periodAfternoon = document.getElementById("afternoon");
-const periodNight = document.getElementById("night");
+const periodMorning = document.getElementById("period-morning");
+const periodAfternoon = document.getElementById("period-afternoon");
+const periodNight = document.getElementById("period-night");
 
 //recebe os agendamentos
-export function schedulesShow({ dailySchedules }) {
-    try{
+export async function scheduleShow({ dailySchedules }) {
+    try {
         //limpa as listas
         periodMorning.innerHTML = "";
         periodAfternoon.innerHTML = "";
@@ -22,7 +22,7 @@ export function schedulesShow({ dailySchedules }) {
             //Adiciona o ID do agendamento 
             item.setAttribute("data-id", schedule.id);
 
-            time.textContent = dayjs(schedule.when).format("HH:mm");
+            time.textContent = dayjs(schedule.when).format("HH:mm").toString();
             name.textContent = schedule.name;
 
             //Cria ìcone de cancelamento do agendamento
@@ -32,24 +32,22 @@ export function schedulesShow({ dailySchedules }) {
             cancelIcon.setAttribute("alt", "Cancelar");
 
             //Adiciona o tempo, nome e ìcone ao item
-            item.appendChild(time, name, cancelIcon);
+            item.append(time, name, cancelIcon);
 
             //Obtém somente a hora
             const hour = dayjs(schedule.when).hour();
 
             //Renderiza os agendamento na sessão (manha, tarde e noite)
-            if (hour <= 12){
+            if (hour <= 12) {
                 periodMorning.appendChild(item);
-            }else if (hour > 12 && hour <= 18){
+            } else if (hour > 12 && hour <= 18) {
                 periodAfternoon.appendChild(item);
-            }else{
+            } else {
                 periodNight.appendChild(item);
             }
-            
-        })
-
-    }catch (error) {
-        alert("Não foi possivel buscar os agendamentos do dia selecionado, tente novamente mais tarde");
+        });
+    } catch (error) {
         console.log(error);
+        alert("Não foi possivel exibir os agendamentos!");
     }
 }

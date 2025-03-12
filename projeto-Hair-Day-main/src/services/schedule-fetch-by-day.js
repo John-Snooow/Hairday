@@ -16,6 +16,5 @@ export async function scheduleFetchByDay({ date }) {
     } catch (error) {
         console.log(error)
         alert("Nao foi possivel buscar os agendamentos do dia selecionado!")
-        return [] // Retorna um array vazio em caso de erro
     }
 }
