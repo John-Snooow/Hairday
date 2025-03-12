@@ -4,20 +4,27 @@ import {openingHours} from "../../utils/opening-hous.js"// importa o modulo
 import { hoursClick } from "./hours-click"
 
 const hours = document.getElementById("hours")
-export function hoursLoad({date}) {
+export function hoursLoad({date, dailySchedules}) {
     // Limpa os horarios anteriores
     hours.innerHTML = ""
+
+    //Obtem a lista de horarios ocupados
+    const unavailableHours = dailySchedules.map((schedule) => 
+    dayjs(schedule.when).format("HH:mm")
+)
 
     const opening = openingHours.map((hour) => {
         // Recupera somente a Hora
         const [scheduleHour] = hour.split(":")
 
         //Adiciona a hora na data e verifica se esta no passado
-        const isHourPast = dayjs(date).add(scheduleHour, "hour").isAfter(dayjs())
+        const isHourPast = dayjs(date).add(scheduleHour, "hour").isBefore(dayjs())
         
+        const available = !unavailableHours.includes(hour) && !isHourPast
+
         return {
             hour,
-            available: isHourPast,
+            available
         }
     })
 
